@@ -11,7 +11,8 @@ const messageFunction = async (event) => {
         body: JSON.stringify({
             message: {}
               
-    });
+    })
+});
     const data = await res.json();
     console.log("data", data)
 }
