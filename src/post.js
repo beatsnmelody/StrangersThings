@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Delete from './deletePost.js';
 
 const Homepage = (props) => {
     const {
@@ -11,7 +12,12 @@ const Homepage = (props) => {
     const [userPrice, setPrice] = useState('');
     useEffect(() => {
         const fetchPosts = async () => {
-            const rsp = await fetch("https://strangers-things.herokuapp.com/api/2209-FTB-CT-WEB-PT/posts");
+            const rsp = await fetch("https://strangers-things.herokuapp.com/api/2209-FTB-CT-WEB-PT/posts", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userToken}`
+                },
+            });
             const data = await rsp.json();
             console.log("data", data);
             setPosts(data.data.posts);
@@ -54,6 +60,8 @@ const Homepage = (props) => {
                 return <div key={index}>
                     <h3>{post.title}</h3>
                     <div class="description">{post.description}</div>
+                    { post.isAuthor ? <Delete post={post}
+                    userToken={userToken}/> : null}
                 </div>
             })
         }

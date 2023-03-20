@@ -3,22 +3,22 @@ import React, { useEffect, useState } from 'react';
 const Delete = (props) =>{
     const {
         userToken,
-        setToken
+        post
     } = props
 
 const deletePost = async (event) => {
-    const [posts, setPosts] = useState('');
     event.preventDefault()
-    const res = fetch(`${APIURL}posts/${posts._id}`, {
+    const res = fetch(`https://strangers-things.herokuapp.com/api/2209-FTB-CT-WEB-PT/posts/${post._id}`, {
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${userToken}`
         }
     });
-    const data = await res.json();
-    console.log("data", data)
 }
+return(
+<button onClick={deletePost} className="button">Delete Post</button>
+);
 }
 
-export default Delete
+export default Delete;
